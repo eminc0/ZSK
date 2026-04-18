@@ -253,3 +253,83 @@ body {
 .puzzle-piece.returning {
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
+/* Sahte Uyarı Overlay (Arka Plan Karartma) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(114, 47, 55, 0.3); /* Burgundy renginde hafif şeffaf karartma */
+    backdrop-filter: blur(8px); /* Arkadaki puzzle'ı bulanıklaştır */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Uyarı Kutusu */
+.fake-alert {
+    width: 85%;
+    max-width: 320px;
+    background: rgba(252, 251, 244, 0.85); /* Krem rengi cam efekti */
+    padding: 30px 20px;
+    border-radius: 25px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    transform: scale(0.8);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.overlay.visible .fake-alert {
+    transform: scale(1); /* Açılırken hafifçe büyüme efekti */
+}
+
+.alert-icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.alert-title {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: var(--burgundy);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.alert-message {
+    margin: 0 0 25px 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #444;
+}
+
+/* Şık "Tamam" Butonu */
+.alert-btn {
+    background: var(--burgundy);
+    color: var(--cream);
+    border: none;
+    padding: 12px 40px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(114, 47, 55, 0.3);
+    transition: all 0.3s ease;
+}
+
+.alert-btn:active {
+    transform: scale(0.95);
+    background: var(--soft-pink);
+}

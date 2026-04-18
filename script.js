@@ -153,3 +153,35 @@ function checkWin() {
 }
 
 initPuzzle();
+
+// checkWin fonksiyonunun içindeki successMessage kısmını bununla değiştir:
+function checkWin() {
+    if (correctPlacements === gridSize * gridSize) {
+        // Tahtayı ve parçaları sabitle
+        board.style.backdropFilter = "none";
+        board.style.background = "transparent";
+        board.style.border = "4px solid var(--soft-pink)";
+        
+        // Minik bir gecikme ile "Sahte Uyarıyı" göster (Gerçekçilik için)
+        setTimeout(() => {
+            const overlay = document.getElementById('fake-alert-overlay');
+            overlay.classList.add('visible');
+        }, 800);
+    }
+}
+
+// "Tamam" butonuna tıklama olayı
+document.getElementById('alert-btn').addEventListener('click', () => {
+    const overlay = document.getElementById('fake-alert-overlay');
+    overlay.classList.remove('visible');
+    
+    // Şimdi burada devreye girecek olan şey senin hayal gücün!
+    // Butona bastıktan sonra ekranın kalplerle dolması mı, 
+    // yoksa bir sonraki animasyonun başlaması mı? 
+    startFinalSurprise(); 
+});
+
+function startFinalSurprise() {
+    console.log("Büyük final başlıyor...");
+    // Buraya bir sonraki aşamanın kodlarını yazacağız dedem.
+}
