@@ -196,9 +196,18 @@ document.querySelectorAll('.next-card-btn').forEach(btn => {
         
         // Eğer son butona tıklandıysa işlemi bitir (Veya buraya konfeti ekleriz)
         if (this.id === 'final-btn') {
-            console.log("Sürpriz tamamlandı!");
-            // Şimdilik butonun üzerindeki yazıyı değiştirip kalpler çıkaralım
+            console.log("Sürpriz tamamlandı! Buket gösteriliyor...");
             this.innerText = "❤️ Sonsuza Dek ❤️";
+            this.style.background = "var(--soft-pink)";
+            this.style.color = "var(--burgundy)";
+            this.style.pointerEvents = "none"; // Tekrar tıklamayı engelle
+            
+            // YENİ: Buketi Göster
+            const bouquet = document.getElementById('final-bouquet-container');
+            if (bouquet) {
+                bouquet.classList.remove('hidden-bouquet');
+                bouquet.classList.add('visible-bouquet');
+            }
             return;
         }
 
