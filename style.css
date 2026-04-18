@@ -6,9 +6,8 @@
     --piece-size: 150px;
 }
 
-/* YENİ: Dinamik ve Nefes Alan Arka Plan */
+/* --- DİNAMİK VE NEFES ALAN ARKA PLAN --- */
 body {
-    /* Krem ve uçuk pembe arasında geçiş yapan gradient */
     background: linear-gradient(135deg, #fcfbf4, #fbe4eb, #fcfbf4, #f8bbd0);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
@@ -20,14 +19,13 @@ body {
     touch-action: none; 
 }
 
-/* Arka plan renklerinin yavaşça yer değiştirmesi */
 @keyframes gradientBG {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* YENİ: Uçuşan Kalpler Konteyneri */
+/* --- UÇUŞAN KALPLER --- */
 .bg-hearts {
     position: absolute;
     top: 0;
@@ -35,17 +33,16 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: -1; /* Uygulamanın arkasında kalması için */
-    pointer-events: none; /* Dokunmaları engellemesin diye */
+    z-index: -1; 
+    pointer-events: none; 
 }
 
-/* Saf CSS ile Kalp Çizimi ve Başlangıç Ayarları */
 .heart {
     position: absolute;
-    bottom: -100px; /* Ekranın altından başlasın */
+    bottom: -100px; 
     width: 20px;
     height: 20px;
-    background-color: rgba(244, 143, 177, 0.4); /* Yarı saydam zarif pembe */
+    background-color: rgba(244, 143, 177, 0.4); 
     transform: rotate(-45deg);
     animation: floatUp 10s infinite ease-in;
 }
@@ -62,7 +59,6 @@ body {
 .heart::before { top: -10px; left: 0; }
 .heart::after { top: 0; left: 10px; }
 
-/* Kalplerin rastgele yerlerden, farklı hızlarda çıkması */
 .heart:nth-child(1) { left: 15%; animation-duration: 8s; transform: scale(0.6) rotate(-45deg); }
 .heart:nth-child(2) { left: 35%; animation-duration: 12s; animation-delay: 2s; transform: scale(1) rotate(-45deg); }
 .heart:nth-child(3) { left: 55%; animation-duration: 10s; animation-delay: 4s; transform: scale(0.8) rotate(-45deg); }
@@ -70,12 +66,12 @@ body {
 .heart:nth-child(5) { left: 90%; animation-duration: 9s; animation-delay: 3s; transform: scale(0.7) rotate(-45deg); }
 .heart:nth-child(6) { left: 5%; animation-duration: 11s; animation-delay: 5s; transform: scale(0.9) rotate(-45deg); }
 
-/* Yukarı doğru süzülme ve yavaşça silinme animasyonu */
 @keyframes floatUp {
     0% { bottom: -100px; opacity: 1; margin-left: 0; }
-    100% { bottom: 100vh; opacity: 0; margin-left: 50px; /* Hafif sağa kayarak yükselir */ }
+    100% { bottom: 100vh; opacity: 0; margin-left: 50px; }
 }
 
+/* --- ANA KONTEYNER VE YAZILAR --- */
 .app-container {
     display: flex;
     flex-direction: column;
@@ -84,6 +80,7 @@ body {
     height: 100vh;
     padding-top: 5vh;
     box-sizing: border-box;
+    z-index: 1;
 }
 
 .title {
@@ -99,100 +96,25 @@ body {
     margin-bottom: 20px;
 }
 
-/* Boş Çerçeve (Yuvalar) */
+/* --- PREMIUM CAM EFEKTLİ YAPBOZ TAHTASI --- */
 .puzzle-board {
     width: var(--board-size);
     height: var(--board-size);
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    background-color: rgba(114, 47, 55, 0.1);
-    border: 4px dashed var(--burgundy);
-    border-radius: 12px;
-    position: relative;
-    margin-bottom: 30px;
-}
-
-/* Yapboz yuvaları (şeffaf alanlar) */
-.slot {
-    width: var(--piece-size);
-    height: var(--piece-size);
-    box-sizing: border-box;
-    border: 1px solid rgba(114, 47, 55, 0.2);
-}
-
-/* Parçaların beklediği alt alan */
-.pieces-tray {
-    width: 100%;
-    height: 200px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* Hareketli Parçalar */
-.puzzle-piece {
-    width: var(--piece-size);
-    height: var(--piece-size);
-    position: absolute;
-    background-color: var(--cream);
-    background-size: var(--board-size) var(--board-size);
-    border-radius: 10px; /* Modern ve tatlı bir puzzle dokusu */
-    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-    transition: transform 0.1s;
-    z-index: 10;
-}
-
-/* Tıklanıp sürüklenirken parça biraz büyüsün (Dokunma geri bildirimi) */
-.puzzle-piece.dragging {
-    transform: scale(1.1);
-    z-index: 100;
-    box-shadow: 0 15px 25px rgba(0,0,0,0.3);
-}
-
-.hidden {
-    opacity: 0;
-    pointer-events: none;
-    position: absolute;
-    bottom: 10%;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.visible {
-    opacity: 1;
-    pointer-events: auto;
-    position: absolute;
-    bottom: 10%;
-}
-
-/* Önceki :root ve body kısımların AYNI kalsın, onlara dokunma */
-
-/* --- YENİ: Premium Cam Efektli Yapboz Tahtası --- */
-.puzzle-board {
-    width: var(--board-size);
-    height: var(--board-size);
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    
-    /* Buzlu Cam (Glassmorphism) Büyüsü */
     background: rgba(252, 251, 244, 0.25);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
     border: 2px solid rgba(252, 251, 244, 0.6);
-    border-radius: 20px; /* Daha yumuşak köşeler */
-    box-shadow: 
-        inset 0 0 20px rgba(255,255,255,0.5), /* İç aydınlatma */
-        0 15px 35px rgba(114, 47, 55, 0.15); /* Dış derinlik */
-    
+    border-radius: 20px; 
+    box-shadow: inset 0 0 20px rgba(255,255,255,0.5), 0 15px 35px rgba(114, 47, 55, 0.15); 
     overflow: hidden;
     margin-bottom: 30px;
     position: relative;
     z-index: 2;
 }
 
-/* Yuvaların çizgilerini çok zarif ve ince yapıyoruz */
 .slot {
     width: var(--piece-size);
     height: var(--piece-size);
@@ -200,7 +122,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
-/* --- YENİ: Sağa Sola Kaydırılabilir Tepsi (Kızak) --- */
+/* --- KAYDIRILABİLİR TEPSİ (KIZAK) --- */
 .pieces-tray {
     width: 90%;
     max-width: 400px;
@@ -208,61 +130,55 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 20px; /* Parçalar arası boşluk */
+    gap: 20px; 
     padding: 0 20px;
-    
-    /* Yana kaydırma özellikleri */
     overflow-x: auto; 
     scroll-behavior: smooth;
-    
-    /* Scrollbar'ı gizle ki profesyonel dursun */
     -ms-overflow-style: none; 
     scrollbar-width: none; 
-    
     background: rgba(114, 47, 55, 0.05);
     border-radius: 20px;
     box-shadow: inset 0 5px 15px rgba(0,0,0,0.03);
     z-index: 10;
 }
+
 .pieces-tray::-webkit-scrollbar {
-    display: none; /* Chrome/Safari için scrollbar gizleme */
+    display: none; 
 }
 
-/* --- YENİ: Hareketli Parçalar --- */
+/* --- HAREKETLİ PARÇALAR --- */
 .puzzle-piece {
     width: var(--piece-size);
     height: var(--piece-size);
-    position: relative; /* Tepsideyken yan yana durmaları için */
-    flex-shrink: 0; /* Tepside sıkışmamaları için */
+    position: relative; 
+    flex-shrink: 0; 
     background-color: var(--cream);
     background-size: var(--board-size) var(--board-size);
     border-radius: 12px; 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* 3 Boyutlu hissiyat */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
     touch-action: none;
     z-index: 100;
 }
 
-/* Sürükleme anındaki görsel şölen */
 .puzzle-piece.dragging {
-    transform: scale(1.08) translateY(-10px); /* Havaya kalkma hissi */
+    transform: scale(1.08) translateY(-10px); 
     box-shadow: 0 20px 30px rgba(0,0,0,0.25);
     opacity: 0.95;
 }
 
-/* Parça yanlış yere bırakıldığında yumuşakça tepsiye dönmesi için */
 .puzzle-piece.returning {
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Sahte Uyarı Overlay (Arka Plan Karartma) */
+/* --- SAHTE UYARI (MODAL) --- */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(114, 47, 55, 0.3); /* Burgundy renginde hafif şeffaf karartma */
-    backdrop-filter: blur(8px); /* Arkadaki puzzle'ı bulanıklaştır */
+    background: rgba(114, 47, 55, 0.3); 
+    backdrop-filter: blur(8px); 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -277,11 +193,10 @@ body {
     pointer-events: auto;
 }
 
-/* Uyarı Kutusu */
 .fake-alert {
     width: 85%;
     max-width: 320px;
-    background: rgba(252, 251, 244, 0.85); /* Krem rengi cam efekti */
+    background: rgba(252, 251, 244, 0.85); 
     padding: 30px 20px;
     border-radius: 25px;
     text-align: center;
@@ -292,7 +207,7 @@ body {
 }
 
 .overlay.visible .fake-alert {
-    transform: scale(1); /* Açılırken hafifçe büyüme efekti */
+    transform: scale(1); 
 }
 
 .alert-icon {
@@ -315,7 +230,6 @@ body {
     color: #444;
 }
 
-/* Şık "Tamam" Butonu */
 .alert-btn {
     background: var(--burgundy);
     color: var(--cream);
