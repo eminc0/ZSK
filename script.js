@@ -157,21 +157,37 @@ if(alertBtn) {
 }
 
 function startFinalSurprise() {
-    console.log("Büyük final başladı: Kartlar ekrana geliyor...");
+    console.log("Büyük final başladı: Ekran temizleniyor...");
     
-    // 1. Arka plandaki yapbozu ve tepsiyi yumuşakça gizle (Kalpler kalacak!)
+    // 1. Ana çerçeveyi (Başlık, tahta, tepsi) gizlemeye başla
     const appContainer = document.querySelector('.app-container');
-    appContainer.style.transition = "opacity 1s ease";
-    appContainer.style.opacity = "0";
+    if (appContainer) {
+        appContainer.style.transition = "opacity 1s ease";
+        appContainer.style.opacity = "0";
+    }
     
-    // 2. Bir saniye sonra app-container'ı tamamen kaldır ve kartları göster
+    // 2. ÇOK ÖNEMLİ: Body'ye kaçmış olan yapboz parçalarını tek tek bul ve erit
+    const allPieces = document.querySelectorAll('.puzzle-piece');
+    allPieces.forEach(piece => {
+        piece.style.transition = "opacity 1s ease";
+        piece.style.opacity = "0";
+    });
+    
+    // 3. Bir saniye sonra her şeyi tamamen ortadan kaldır ve kartları sahneye al
     setTimeout(() => {
-        appContainer.style.display = "none";
+        if (appContainer) appContainer.style.display = "none";
         
+        allPieces.forEach(piece => {
+            piece.style.display = "none"; // Parçaları tamamen yok et
+        });
+        
+        // Kartları göster
         const cardsContainer = document.getElementById('cards-container');
-        cardsContainer.classList.remove('hidden-cards');
-        cardsContainer.classList.add('visible-cards');
-    }, 1000);
+        if (cardsContainer) {
+            cardsContainer.classList.remove('hidden-cards');
+            cardsContainer.classList.add('visible-cards');
+        }
+    }, 1000); // 1 saniyelik yumuşak geçiş süresi
 }
 
 // Kartlar arası geçiş motoru
