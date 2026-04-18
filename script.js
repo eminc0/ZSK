@@ -193,9 +193,12 @@ function startFinalSurprise() {
 // Çiçek Çizim Fonksiyonu (Algoritma)
 function drawPureJSBouquet() {
     const container = document.getElementById('final-bouquet-container');
-    container.innerHTML = ''; // İçini temizle
+    if (!container) {
+        console.error("Dedem HTML'de buket container'ı yok!");
+        return;
+    }
+    container.innerHTML = ''; 
     
-    // Çiçeklerimizin konumu, türü ve açma gecikmesi (Mükemmel bir kompozisyon için)
     const flowersData = [
         { type: 'lily', x: 0, y: -60, rot: 0, delay: 100, scale: 1 },
         { type: 'daisy', x: -50, y: -20, rot: -20, delay: 350, scale: 0.85 },
@@ -206,53 +209,45 @@ function drawPureJSBouquet() {
     ];
 
     flowersData.forEach(data => {
-        // Çiçek kapsayıcısı
         const flower = document.createElement('div');
         flower.className = `flower ${data.type}`;
         flower.style.left = `calc(50% + ${data.x}px)`;
         flower.style.top = `calc(50% + ${data.y}px)`;
-        // Boyutlandırma
-        flower.style.transform = `scale(0) scale(${data.scale})`; 
+        
+        // BAŞLANGIÇTA TAMAMEN GİZLİ VE SIFIR BOYUT
+        flower.style.transform = `scale(0)`; 
 
-        // Sapı Ekle (Sapın açısı merkeze göre eğimli olsun)
         const stem = document.createElement('div');
         stem.className = 'stem';
         stem.style.transform = `rotate(${-data.x / 2.5}deg)`;
         flower.appendChild(stem);
 
-        // Çiçek Merkezi
         const center = document.createElement('div');
         center.className = 'center';
         flower.appendChild(center);
 
-        // Yaprakları (Petals) Çiz
-        const petalCount = data.type === 'daisy' ? 12 : 6; // Papatyaya 12, Zambak'a 6 yaprak
+        const petalCount = data.type === 'daisy' ? 12 : 6; 
         for (let i = 0; i < petalCount; i++) {
             const petal = document.createElement('div');
             petal.className = 'petal';
             const angle = i * (360 / petalCount);
-            // Yaprakları merkezden dışa doğru döndür
             petal.style.transform = `rotate(${angle}deg)`;
             flower.appendChild(petal);
         }
 
         container.appendChild(flower);
 
-        // Çiçeği Gecikmeli Olarak Açtır (Bloom animasyonu)
+        // ÇİÇEKLERİ GECİKMELİ OLARAK AÇTIRAN MUCİZE:
         setTimeout(() => {
-            flower.classList.add('bloom');
-            // Orijinal scale değerini koruyarak bloom yap
             flower.style.transform = `scale(${data.scale})`; 
         }, data.delay);
     });
 
-    // En son Kurdeleyi ekle
     const ribbon = document.createElement('div');
     ribbon.className = 'ribbon';
     ribbon.innerText = "Sonsuza Dek Bağlıyız";
     container.appendChild(ribbon);
     
-    // Kurdele animasyonunu tetikle
     setTimeout(() => {
         ribbon.classList.add('show');
     }, 1500);
