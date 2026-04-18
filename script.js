@@ -157,6 +157,55 @@ if(alertBtn) {
 }
 
 function startFinalSurprise() {
-    console.log("Büyük final başlıyor...");
-    // Birazdan asıl şov buraya eklenecek!
+    console.log("Büyük final başladı: Kartlar ekrana geliyor...");
+    
+    // 1. Arka plandaki yapbozu ve tepsiyi yumuşakça gizle (Kalpler kalacak!)
+    const appContainer = document.querySelector('.app-container');
+    appContainer.style.transition = "opacity 1s ease";
+    appContainer.style.opacity = "0";
+    
+    // 2. Bir saniye sonra app-container'ı tamamen kaldır ve kartları göster
+    setTimeout(() => {
+        appContainer.style.display = "none";
+        
+        const cardsContainer = document.getElementById('cards-container');
+        cardsContainer.classList.remove('hidden-cards');
+        cardsContainer.classList.add('visible-cards');
+    }, 1000);
 }
+
+// Kartlar arası geçiş motoru
+document.querySelectorAll('.next-card-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        
+        // Eğer son butona tıklandıysa işlemi bitir (Veya buraya konfeti ekleriz)
+        if (this.id === 'final-btn') {
+            console.log("Sürpriz tamamlandı!");
+            // Şimdilik butonun üzerindeki yazıyı değiştirip kalpler çıkaralım
+            this.innerText = "❤️ Sonsuza Dek ❤️";
+            return;
+        }
+
+        const currentCard = this.parentElement;
+        const nextCardId = 'card-' + this.getAttribute('data-next');
+        const nextCard = document.getElementById(nextCardId);
+
+        // Mevcut kartı yukarı doğru kaydırarak sil
+        currentCard.classList.remove('active-card');
+        currentCard.classList.add('fade-out');
+
+        // Yarım saniye bekle (CSS transition bitene kadar), sonra yenisini getir
+        setTimeout(() => {
+            currentCard.style.display = 'none';
+            currentCard.classList.remove('fade-out'); // Temizlik
+            
+            nextCard.style.display = 'flex';
+            
+            // Tarayıcının render alabilmesi için çok minik bir gecikme
+            setTimeout(() => {
+                nextCard.classList.add('active-card');
+            }, 50);
+            
+        }, 600); 
+    });
+});
