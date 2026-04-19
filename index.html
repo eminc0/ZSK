@@ -23,47 +23,42 @@
         
         <div id="puzzle-board" class="puzzle-board"></div>
         <div id="pieces-tray" class="pieces-tray"></div>
-
-        <div id="fake-alert-overlay" class="overlay hidden">
-    <div class="fake-alert">
-        <div class="alert-icon">⚠️</div>
-        <h2 class="alert-title">Sistem Hatası</h2>
-        <p class="alert-message">Güzelliğiniz internet akışını bozuyor. <br> Lütfen bekleyiniz...</p>
-        <button id="alert-btn" class="alert-btn">Tamam</button>
     </div>
-</div>
+
+    <div id="fake-alert-overlay" class="overlay hidden">
+        <div class="fake-alert">
+            <div class="alert-icon">⚠️</div>
+            <h2 class="alert-title">Sistem Hatası</h2>
+            <p class="alert-message">Güzelliğiniz internet akışını bozuyor. <br> Lütfen bekleyiniz...</p>
+            <button id="alert-btn" class="alert-btn">Tamam</button>
+        </div>
     </div>
 
     <div id="cards-container" class="cards-wrapper hidden-cards">
-    on
-    <div class="love-card active-card" id="card-1">
-        <p class="card-text">Zeynep Hanım. Vizeleri de atlattınız</p>
-        <button class="next-card-btn" data-next="2">Devam Et</button>
+        
+        <div class="love-card active-card" id="card-1">
+            <p class="card-text">Zeynep Hanım. Vizeleri de atlattınız.</p>
+            <button class="next-card-btn" data-next="2">Devam Et</button>
+        </div>
+
+        <div class="love-card" id="card-2">
+            <p class="card-text">Şimdi derin bir nefes alın...</p>
+            <button class="next-card-btn" data-next="3">Devam Et</button>
+        </div>
+
+        <div class="love-card" id="card-3">
+            <p class="card-text">Kendinizi papatyalarla, zambaklarla dolu bir zeminde hayal edin.</p>
+            <button class="next-card-btn" data-next="4">Devam Et</button>
+        </div>
+
+        <div class="love-card" id="card-4">
+            <p class="card-text">Şimdi nefesinizi verin.</p>
+            <button class="next-card-btn final-btn" id="final-btn">Hayatın keyfini çıkarın</button>
+            
+            <div id="final-bouquet-container" class="bouquet-wrapper"></div>
+        </div>
+
     </div>
-
-    <div class="love-card" id="card-2">
-        <p class="card-text">Şimdi derin bir nefes alın...</p>
-        <button class="next-card-btn" data-next="3">Devam Et</button>
-    </div>
-
-    <div class="love-card" id="card-3">
-        <p class="card-text">Kendinizi papatyalarla, zambaklarla dolu bir zeminde hayal edin.</p>
-        <button class="next-card-btn" data-next="4">Devam Et</button>
-    </div>
-
-    <div class="love-card" id="card-4">
-        <p class="card-text">Şimdi nefesinizi verin.</p>
-        <button class="next-card-btn final-btn" id="final-btn">Hayatın keyfini çıkarın</button>
-    </div>
-
-</div>
-
-<div class="love-card" id="card-4">
-    <p class="card-text">Beni ben yaptığın, her eksik parçamı böyle güzel tamamladığın için teşekkür ederim. Sevgililer Günümüz kutlu olsun sevgilim...</p>
-    <button class="next-card-btn final-btn" id="final-btn">Seni Çok Seviyorum!</button>
-    
-    <div id="final-bouquet-container" class="bouquet-wrapper"></div>
-</div>
 
     <script src="script.js"></script>
 </body>

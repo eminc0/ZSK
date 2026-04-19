@@ -124,7 +124,6 @@ function addTouchEvents(piece) {
     });
 }
 
-// TERTEMİZ TEK BİR CHECKWIN FONKSİYONU
 function checkWin() {
     if (correctPlacements === gridSize * gridSize) {
         board.style.backdropFilter = "none";
@@ -145,7 +144,6 @@ function checkWin() {
 
 initPuzzle();
 
-// TAMAM BUTONU TETİKLEYİCİSİ
 const alertBtn = document.getElementById('alert-btn');
 if(alertBtn) {
     alertBtn.addEventListener('click', () => {
@@ -159,35 +157,31 @@ if(alertBtn) {
 function startFinalSurprise() {
     console.log("Büyük final başladı: Ekran temizleniyor...");
     
-    // 1. Ana çerçeveyi (Başlık, tahta, tepsi) gizlemeye başla
     const appContainer = document.querySelector('.app-container');
     if (appContainer) {
         appContainer.style.transition = "opacity 1s ease";
         appContainer.style.opacity = "0";
     }
     
-    // 2. ÇOK ÖNEMLİ: Body'ye kaçmış olan yapboz parçalarını tek tek bul ve erit
     const allPieces = document.querySelectorAll('.puzzle-piece');
     allPieces.forEach(piece => {
         piece.style.transition = "opacity 1s ease";
         piece.style.opacity = "0";
     });
     
-    // 3. Bir saniye sonra her şeyi tamamen ortadan kaldır ve kartları sahneye al
     setTimeout(() => {
         if (appContainer) appContainer.style.display = "none";
         
         allPieces.forEach(piece => {
-            piece.style.display = "none"; // Parçaları tamamen yok et
+            piece.style.display = "none"; 
         });
         
-        // Kartları göster
         const cardsContainer = document.getElementById('cards-container');
         if (cardsContainer) {
             cardsContainer.classList.remove('hidden-cards');
             cardsContainer.classList.add('visible-cards');
         }
-    }, 1000); // 1 saniyelik yumuşak geçiş süresi
+    }, 1000); 
 }
 
 // Çiçek Çizim Fonksiyonu (Algoritma)
@@ -214,7 +208,6 @@ function drawPureJSBouquet() {
         flower.style.left = `calc(50% + ${data.x}px)`;
         flower.style.top = `calc(50% + ${data.y}px)`;
         
-        // BAŞLANGIÇTA TAMAMEN GİZLİ VE SIFIR BOYUT
         flower.style.transform = `scale(0)`; 
 
         const stem = document.createElement('div');
@@ -237,7 +230,6 @@ function drawPureJSBouquet() {
 
         container.appendChild(flower);
 
-        // ÇİÇEKLERİ GECİKMELİ OLARAK AÇTIRAN MUCİZE:
         setTimeout(() => {
             flower.style.transform = `scale(${data.scale})`; 
         }, data.delay);
@@ -248,19 +240,18 @@ function drawPureJSBouquet() {
 document.querySelectorAll('.next-card-btn').forEach(btn => {
     btn.addEventListener('click', function() {
         
-        // SON BUTON: "Sonsuza Dek" tıklandığında
+        // SON BUTON TIKLANDIĞINDA
         if (this.id === 'final-btn') {
-            this.innerText = "❤️ Sonsuza Dek ❤️";
+            // Yazıyı HTML'deki ile uyumlu hale getirdik
+            this.innerText = "❤️ Hayatın keyfini çıkarın ❤️"; 
             this.style.background = "var(--soft-pink)";
             this.style.color = "var(--burgundy)";
-            this.style.pointerEvents = "none"; // Tekrar basılmasını engelle
+            this.style.pointerEvents = "none"; 
             
-            // PURE JS BUKETİ ÇİZİMİNİ BAŞLAT
             drawPureJSBouquet();
             return;
         }
 
-        // Diğer kartların geçişi
         const currentCard = this.parentElement;
         const nextCardId = 'card-' + this.getAttribute('data-next');
         const nextCard = document.getElementById(nextCardId);
