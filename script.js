@@ -242,15 +242,6 @@ function drawPureJSBouquet() {
             flower.style.transform = `scale(${data.scale})`; 
         }, data.delay);
     });
-
-    const ribbon = document.createElement('div');
-    ribbon.className = 'ribbon';
-    ribbon.innerText = "Sonsuza Dek Bağlıyız";
-    container.appendChild(ribbon);
-    
-    setTimeout(() => {
-        ribbon.classList.add('show');
-    }, 1500);
 }
 
 // Kart Geçiş Motoru ve Final Tetikleyicisi
