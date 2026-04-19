@@ -339,7 +339,7 @@ body {
     color: var(--burgundy);
 }
 
-/* --- PURE CSS BUKET ALANI --- */
+/* --- PURE CSS PEMBE & BEYAZ LALE BUKETİ --- */
 .bouquet-wrapper {
     position: relative;
     width: 100%;
@@ -347,71 +347,114 @@ body {
     margin-top: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
 }
 
-.flower {
+/* Lale Ana Konteyneri (Bu sefer buket olduğu için konumları JS belirleyecek) */
+.tulip {
     position: absolute;
     transform: scale(0); 
-    transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    transform-origin: bottom center;
+    transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.stem {
-    width: 6px;
+/* Yeşil Zarif Gövde */
+.tulip-stem {
+    width: 6px; /* Bukette çok kaba durmasın diye biraz incelttik */
     height: 120px;
-    background: #81c784; 
-    position: absolute;
-    top: 0;
-    left: -3px;
+    background: #4caf50;
     border-radius: 3px;
-    transform-origin: 50% 0;
-    z-index: 0;
-    box-shadow: inset -2px 0 5px rgba(0,0,0,0.1);
+    box-shadow: inset 2px 0 5px rgba(0,0,0,0.2);
+    margin: 0 auto;
 }
 
-/* --- PAPATYA (DAISY) --- */
-.daisy .center {
-    width: 30px;
-    height: 30px;
-    background: #ffeb3b; 
-    border-radius: 50%;
+/* Lale Yaprakları (Sağ ve Sol) */
+.tulip-leaf {
     position: absolute;
-    top: -15px;
+    bottom: 10px;
+    width: 35px;
+    height: 80px;
+    background: #388e3c;
+    border-radius: 0 100% 0 100%; 
+    transform-origin: bottom left;
+    box-shadow: inset 2px 2px 5px rgba(255,255,255,0.2);
+    transition: transform 1.5s ease-in-out;
+}
+
+.tulip-leaf.left {
     left: -15px;
-    z-index: 2;
-    box-shadow: inset 0 0 10px #f57f17;
-}
-.daisy .petal {
-    width: 12px;
-    height: 45px;
-    background: #ffffff;
-    border-radius: 50px;
-    position: absolute;
-    top: -45px;
-    left: -6px;
-    transform-origin: 50% 100%; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transform: rotate(-40deg) scale(0);
 }
 
-/* --- ZAMBAK (LILY) --- */
-.lily .center {
-    width: 20px;
-    height: 20px;
-    background: #dce775;
-    border-radius: 50%;
+.tulip-leaf.right {
+    left: 15px;
+    border-radius: 100% 0 100% 0;
+    transform-origin: bottom right;
+    transform: rotate(40deg) scale(0);
+}
+
+/* Çiçek açtığında yapraklar süzülsün */
+.tulip.bloom .tulip-leaf.left { transform: rotate(-40deg) scale(1); }
+.tulip.bloom .tulip-leaf.right { transform: rotate(40deg) scale(1); }
+
+/* Lalenin Kadeh Kısmı (Taç Yapraklar) */
+.tulip-head {
     position: absolute;
-    top: -10px;
-    left: -10px;
+    bottom: 110px;
+    left: -22px; 
+    width: 50px;
+    height: 60px;
+}
+
+.tulip-petal {
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 60px;
+    border-radius: 50% 50% 20% 20%;
+    transform-origin: bottom center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 1s ease-in-out;
+}
+
+/* 1. PEMBE LALE RENKLERİ */
+.tulip.pink .tulip-petal.center {
+    left: 10px;
+    z-index: 3;
+    background: linear-gradient(to top, #d81b60, #f48fb1);
+}
+.tulip.pink .tulip-petal.left {
+    left: -2px;
+    transform: rotate(-10deg);
     z-index: 2;
+    background: linear-gradient(to top, #ad1457, #e91e63);
 }
-.lily .petal {
-    width: 25px;
-    height: 65px;
-    background: linear-gradient(to top, #ffffff, #f48fb1); 
-    border-radius: 50% 50% 0 0; 
-    position: absolute;
-    top: -65px;
-    left: -12px;
-    transform-origin: 50% 100%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+.tulip.pink .tulip-petal.right {
+    left: 22px;
+    transform: rotate(10deg);
+    z-index: 2;
+    background: linear-gradient(to top, #ad1457, #e91e63);
 }
+
+/* 2. BEYAZ LALE RENKLERİ */
+.tulip.white .tulip-petal.center {
+    left: 10px;
+    z-index: 3;
+    background: linear-gradient(to top, #e0e0e0, #ffffff);
+}
+.tulip.white .tulip-petal.left {
+    left: -2px;
+    transform: rotate(-10deg);
+    z-index: 2;
+    background: linear-gradient(to top, #bdbdbd, #f5f5f5);
+}
+.tulip.white .tulip-petal.right {
+    left: 22px;
+    transform: rotate(10deg);
+    z-index: 2;
+    background: linear-gradient(to top, #bdbdbd, #f5f5f5);
+}
+
+/* Çiçek açtığında taç yapraklar dışa kavis yapsın */
+.tulip.bloom .tulip-petal.left { transform: rotate(-20deg); }
+.tulip.bloom .tulip-petal.right { transform: rotate(20deg); }

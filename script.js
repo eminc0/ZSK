@@ -184,8 +184,8 @@ function startFinalSurprise() {
     }, 1000); 
 }
 
-// Çiçek Çizim Fonksiyonu (Algoritma)
-function drawPureJSBouquet() {
+// --- PEMBE VE BEYAZ LALE BUKETİ ÇİZİM FONKSİYONU ---
+function drawPureJSTulipBouquet() {
     const container = document.getElementById('final-bouquet-container');
     if (!container) {
         console.error("Dedem HTML'de buket container'ı yok!");
@@ -193,48 +193,142 @@ function drawPureJSBouquet() {
     }
     container.innerHTML = ''; 
     
-    const flowersData = [
-        { type: 'lily', x: 0, y: -60, rot: 0, delay: 100, scale: 1 },
-        { type: 'daisy', x: -50, y: -20, rot: -20, delay: 350, scale: 0.85 },
-        { type: 'daisy', x: 50, y: -20, rot: 20, delay: 600, scale: 0.85 },
-        { type: 'lily', x: -35, y: 30, rot: -40, delay: 850, scale: 0.75 },
-        { type: 'lily', x: 35, y: 30, rot: 40, delay: 1100, scale: 0.75 },
-        { type: 'daisy', x: 0, y: 25, rot: 0, delay: 1300, scale: 1 }
+    // Buketteki lalelerin konumu, açısı, rengi ve çıkış sırası
+    const tulipsData = [
+        { x: 0, y: -40, rot: 0, delay: 200, scale: 1, color: 'pink' },       // Merkez Uzun Pembe
+        { x: -45, y: -10, rot: -15, delay: 500, scale: 0.9, color: 'white' }, // Sol Orta Beyaz
+        { x: 45, y: -10, rot: 15, delay: 800, scale: 0.9, color: 'pink' },    // Sağ Orta Pembe
+        { x: -80, y: 30, rot: -30, delay: 1100, scale: 0.8, color: 'pink' },  // Sol Alt Pembe
+        { x: 80, y: 30, rot: 30, delay: 1400, scale: 0.8, color: 'white' },   // Sağ Alt Beyaz
+        { x: -20, y: 40, rot: -5, delay: 1700, scale: 0.85, color: 'white' }, // Ön Sol Beyaz
+        { x: 20, y: 40, rot: 5, delay: 2000, scale: 0.85, color: 'pink' }     // Ön Sağ Pembe
     ];
 
-    flowersData.forEach(data => {
-        const flower = document.createElement('div');
-        flower.className = `flower ${data.type}`;
-        flower.style.left = `calc(50% + ${data.x}px)`;
-        flower.style.top = `calc(50% + ${data.y}px)`;
+    tulipsData.forEach(data => {
+        // Lale Ana Konteyneri (Rengi class olarak atıyoruz)
+        const tulip = document.createElement('div');
+        tulip.className = `tulip ${data.color}`;
         
-        flower.style.transform = `scale(0)`; 
+        // Buket formunu vermek için pozisyon ve başlangıç açısı
+        tulip.style.left = `calc(50% + ${data.x}px)`;
+        tulip.style.top = `calc(50% + ${data.y}px)`;
+        tulip.style.transform = `scale(0) rotate(${data.rot}deg)`; 
 
+        // Taç Yapraklar (Head)
+        const head = document.createElement('div');
+        head.className = 'tulip-head';
+        
+        const petalLeft = document.createElement('div');
+        petalLeft.className = 'tulip-petal left';
+        
+        const petalRight = document.createElement('div');
+        petalRight.className = 'tulip-petal right';
+        
+        const petalCenter = document.createElement('div');
+        petalCenter.className = 'tulip-petal center';
+
+        head.appendChild(petalLeft);
+        head.appendChild(petalRight);
+        head.appendChild(petalCenter);
+        tulip.appendChild(head);
+
+        // Sağ ve Sol Yeşil Yapraklar
+        const leafLeft = document.createElement('div');
+        leafLeft.className = 'tulip-leaf left';
+        tulip.appendChild(leafLeft);
+
+        const leafRight = document.createElement('div');
+        leafRight.className = 'tulip-leaf right';
+        tulip.appendChild(leafRight);
+
+        // Yeşil Gövde (Stem)
         const stem = document.createElement('div');
-        stem.className = 'stem';
-        stem.style.transform = `rotate(${-data.x / 2.5}deg)`;
-        flower.appendChild(stem);
+        stem.className = 'tulip-stem';
+        tulip.appendChild(stem);
 
-        const center = document.createElement('div');
-        center.className = 'center';
-        flower.appendChild(center);
+        container.appendChild(tulip);
 
-        const petalCount = data.type === 'daisy' ? 12 : 6; 
-        for (let i = 0; i < petalCount; i++) {
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            const angle = i * (360 / petalCount);
-            petal.style.transform = `rotate(${angle}deg)`;
-            flower.appendChild(petal);
-        }
-
-        container.appendChild(flower);
-
+        // Laleleri sırayla kendi açılarında ve boyutlarında patlatarak açtır
         setTimeout(() => {
-            flower.style.transform = `scale(${data.scale})`; 
+            tulip.classList.add('bloom');
+            tulip.style.transform = `scale(${data.scale}) rotate(${data.rot}deg)`; 
         }, data.delay);
     });
 }
+
+// Kart Geçiş Motoru ve Final Tetikleyicisi
+document.querySelectorAll('.next-card-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        
+        // SON BUTON TIKLANDIĞINDA
+        if (this.id === 'final-btn') {
+            this.innerText = "❤️ Hayatın keyfini çıkarın ❤️"; 
+            this.style.background = "var(--soft-pink)";
+            this.style.color = "var(--burgundy)";
+            this.style.pointerEvents = "none"; 
+            
+            // PURE JS LALE BUKETİ ÇİZİMİNİ BAŞLAT
+            drawPureJSTulipBouquet();
+            return;
+        }
+
+        const currentCard = this.parentElement;
+        const nextCardId = 'card-' + this.getAttribute('data-next');
+        const nextCard = document.getElementById(nextCardId);
+
+        currentCard.classList.remove('active-card');
+        currentCard.classList.add('fade-out');
+
+        setTimeout(() => {
+            currentCard.style.display = 'none';
+            currentCard.classList.remove('fade-out'); 
+            
+            nextCard.style.display = 'flex';
+            
+            setTimeout(() => {
+                nextCard.classList.add('active-card');
+            }, 50);
+            
+        }, 600); 
+    });
+});
+
+// Kart Geçiş Motoru ve Final Tetikleyicisi
+document.querySelectorAll('.next-card-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        
+        // SON BUTON TIKLANDIĞINDA
+        if (this.id === 'final-btn') {
+            this.innerText = "❤️ Hayatın keyfini çıkarın ❤️"; 
+            this.style.background = "var(--soft-pink)";
+            this.style.color = "var(--burgundy)";
+            this.style.pointerEvents = "none"; 
+            
+            // PURE JS LALE ÇİZİMİNİ BAŞLAT
+            drawPureJSTulip();
+            return;
+        }
+
+        const currentCard = this.parentElement;
+        const nextCardId = 'card-' + this.getAttribute('data-next');
+        const nextCard = document.getElementById(nextCardId);
+
+        currentCard.classList.remove('active-card');
+        currentCard.classList.add('fade-out');
+
+        setTimeout(() => {
+            currentCard.style.display = 'none';
+            currentCard.classList.remove('fade-out'); 
+            
+            nextCard.style.display = 'flex';
+            
+            setTimeout(() => {
+                nextCard.classList.add('active-card');
+            }, 50);
+            
+        }, 600); 
+    });
+});
 
 // Kart Geçiş Motoru ve Final Tetikleyicisi
 document.querySelectorAll('.next-card-btn').forEach(btn => {
