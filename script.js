@@ -299,7 +299,7 @@ document.querySelectorAll('.next-card-btn').forEach(btn => {
         
         // SON BUTON TIKLANDIĞINDA
         if (this.id === 'final-btn') {
-            this.innerText = "❤️ Hayatın keyfini çıkarın ❤️"; 
+            this.innerText = "❤️ İyi Ki Varsın ❤️"; 
             this.style.background = "var(--soft-pink)";
             this.style.color = "var(--burgundy)";
             this.style.pointerEvents = "none"; 
