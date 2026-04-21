@@ -262,90 +262,18 @@ document.querySelectorAll('.next-card-btn').forEach(btn => {
         
         // SON BUTON TIKLANDIĞINDA
         if (this.id === 'final-btn') {
-            this.innerText = "❤️ Hayatın keyfini çıkarın ❤️"; 
+            // Tıklandıktan sonra butonun alacağı yeni hal
+            this.innerText = "❤️ İyi Ki Varsın ❤️"; 
             this.style.background = "var(--soft-pink)";
             this.style.color = "var(--burgundy)";
-            this.style.pointerEvents = "none"; 
+            this.style.pointerEvents = "none"; // Tekrar basılmasını engelle
             
-            // PURE JS LALE BUKETİ ÇİZİMİNİ BAŞLAT
+            // PURE JS PEMBE-BEYAZ LALE BUKETİ ÇİZİMİNİ BAŞLAT
             drawPureJSTulipBouquet();
             return;
         }
 
-        const currentCard = this.parentElement;
-        const nextCardId = 'card-' + this.getAttribute('data-next');
-        const nextCard = document.getElementById(nextCardId);
-
-        currentCard.classList.remove('active-card');
-        currentCard.classList.add('fade-out');
-
-        setTimeout(() => {
-            currentCard.style.display = 'none';
-            currentCard.classList.remove('fade-out'); 
-            
-            nextCard.style.display = 'flex';
-            
-            setTimeout(() => {
-                nextCard.classList.add('active-card');
-            }, 50);
-            
-        }, 600); 
-    });
-});
-
-// Kart Geçiş Motoru ve Final Tetikleyicisi
-document.querySelectorAll('.next-card-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        
-        // SON BUTON TIKLANDIĞINDA
-        if (this.id === 'final-btn') {
-            this.innerText = "❤️ İyi Ki Varsın ❤️"; 
-            this.style.background = "var(--soft-pink)";
-            this.style.color = "var(--burgundy)";
-            this.style.pointerEvents = "none"; 
-            
-            // PURE JS LALE ÇİZİMİNİ BAŞLAT
-            drawPureJSTulip();
-            return;
-        }
-
-        const currentCard = this.parentElement;
-        const nextCardId = 'card-' + this.getAttribute('data-next');
-        const nextCard = document.getElementById(nextCardId);
-
-        currentCard.classList.remove('active-card');
-        currentCard.classList.add('fade-out');
-
-        setTimeout(() => {
-            currentCard.style.display = 'none';
-            currentCard.classList.remove('fade-out'); 
-            
-            nextCard.style.display = 'flex';
-            
-            setTimeout(() => {
-                nextCard.classList.add('active-card');
-            }, 50);
-            
-        }, 600); 
-    });
-});
-
-// Kart Geçiş Motoru ve Final Tetikleyicisi
-document.querySelectorAll('.next-card-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        
-        // SON BUTON TIKLANDIĞINDA
-        if (this.id === 'final-btn') {
-            // Yazıyı HTML'deki ile uyumlu hale getirdik
-            this.innerText = "❤️ Hayatın keyfini çıkarın ❤️"; 
-            this.style.background = "var(--soft-pink)";
-            this.style.color = "var(--burgundy)";
-            this.style.pointerEvents = "none"; 
-            
-            drawPureJSBouquet();
-            return;
-        }
-
+        // Diğer kartların geçişi
         const currentCard = this.parentElement;
         const nextCardId = 'card-' + this.getAttribute('data-next');
         const nextCard = document.getElementById(nextCardId);
