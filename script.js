@@ -1,7 +1,9 @@
 const board = document.getElementById('puzzle-board');
 const tray = document.getElementById('pieces-tray');
 
-const imageURL = 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=300&h=300&auto=format&fit=crop'; 
+// Sizin fotoğrafınız burada devreye giriyor (Fotoğrafın adını biz.jpg yapıp aynı klasöre atmayı unutma)
+const imageURL = 'biz.jpg'; 
+
 const gridSize = 2;
 const boardSize = 300;
 const pieceSize = boardSize / gridSize;
