@@ -2,7 +2,7 @@ const board = document.getElementById('puzzle-board');
 const tray = document.getElementById('pieces-tray');
 
 // Sizin fotoğrafınız burada devreye giriyor (Fotoğrafın adını biz.jpg yapıp aynı klasöre atmayı unutma)
-const imageURL = 'biz.jpg'; 
+const imageURL = 'biz.jpeg'; 
 
 const gridSize = 2;
 const boardSize = 300;
